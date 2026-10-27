@@ -1,0 +1,76 @@
+# Historical LVBA images: K406.8; NOT compatible with K550 images.
+# COLMAP half-pixel keypoint convention is included in cx/cy.
+# extrinsic_R/T = IMU_from_LiDAR; Rcl/Pcl = camera_from_LiDAR.
+BALM_stage1:
+  eigen_ratio_array:
+  - 0.2
+  - 0.2
+  - 0.2
+  - 0.2
+  enable: true
+  root_voxel_size: 0.8
+BALM_stage2:
+  eigen_ratio_array:
+  - 0.08
+  - 0.08
+  - 0.08
+  - 0.08
+  root_voxel_size: 0.4
+cam_model:
+  cam_cx: 686.5231260771614
+  cam_cy: 598.0836818501234
+  cam_d0: 0.0
+  cam_d1: 0.0
+  cam_d2: 0.0
+  cam_d3: 0.0
+  cam_fx: 406.83629006895404
+  cam_fy: 406.7431852995162
+  cam_height: 1088
+  cam_width: 1280
+  scale: 1.0
+colmap_output:
+  enable: false
+  filter_size_points3D: 0.025
+data_config:
+  colmap_db_path: Colmap/match.db
+  data_path: dataset/your_sequence/
+  enable_lidar_ba: false
+  enable_visual_ba: true
+  image_sample_step: 1
+extrin_calib:
+  Pcl:
+  - 0.02712
+  - -0.02673
+  - -0.00135
+  Rcl:
+  - -0.004296535151573898
+  - -0.9999361022329114
+  - -0.010456157848047293
+  - -0.004097638523042788
+  - 0.010473771423223812
+  - -0.9999367527352455
+  - 0.9999823744167825
+  - -0.004253417852276452
+  - -0.004142377620180504
+  extrinsic_R:
+  - 0.9999959452760204
+  - 0.0027434195916950367
+  - -0.0007635970549928866
+  - -0.0027423681323571927
+  - 0.9999952948804001
+  - 0.0013746396211419584
+  - 0.0007673646754455778
+  - -0.0013725399831281489
+  - 0.9999987636419605
+  extrinsic_T:
+  - 0.047263640275302124
+  - -0.05079781414514711
+  - -0.02181157676287701
+track_fusion:
+  min_view_angle: 1.0
+  reproj_mean_thr: 3.0
+window_ba:
+  anchor_leaf_size: 0.04
+  enable: true
+  size: 20
+  use_window_ba_rel: true

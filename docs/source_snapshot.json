@@ -1,0 +1,32 @@
+{
+  "upstream": "https://github.com/xuankuzcr/Global-LVBA",
+  "upstream_commit": "10493a2b0f695e32db83dde49dad843a4826e090",
+  "snapshot_archive_sha256": "ac67edaae0873f335ccf938648170d287e38d8481a51b1cbcd0cd451029ebb98",
+  "source_files_sha256": {
+    "SOURCE_TREE.json": "22961dccdbe7da588dddf54527eac1bc596c343eb6076dec5db26fa85e2933e0",
+    "ADAPTATIONS.json": "2ac884c8eeca9daf8bebc38e21646d04ecef51ce06f441a42bd0865de261e784",
+    "CMakeLists.txt": "6f184a85d1b9dfc9bca9c3feed75da7876be533ae25a06da193b07891d12825e",
+    "LICENSE": "b893853757d2040f0fe44287972688eefa904619284b8d9d06447facdb7477e2",
+    "package.xml": "aa31d3b6a47f0d78f0a2ee12b26621fc5fcb35a6474979f63c29d33e54aedc95",
+    ".gitmodules": "978e498080a3c9baa7e6aab96cdefa6b927e94b27cfb0a09b76c9ded48b77805",
+    "README.md": "21222a34e5d2b79958c26d1ce8e0816599869e6b91c2725b663875d2e81da9bb",
+    ".gitignore": "ff52adcc39c64584811f3c2fe8ab0626543175f003faf5ca21331a2090f5aa65",
+    "SOURCE_COMMIT": "02cd277c409e66b5a62fef9a7976c629ae50182958725b077ee3f36668a87784",
+    "config/config.yaml": "2c4f7bc7185975e77f185d0491f67cf1e8676ac8afaab9b91e0df9f27246d34b",
+    "launch/lvba.launch": "57b92fe702d31d2c68ac5ddf4952d070d3344f53df8fc27aceadc1f30688bd8a",
+    "include/lvba_system.h": "7947fb2da819ef4700b41f2094657dfb9a5e71e6c1484228f1f69af224909f2e",
+    "include/dataset_io.h": "598030fbb462de14409e46e75c1d5a773d74c485ff3e5e599e531674fad3ee8f",
+    "include/utils.hpp": "b91b8e2de0444fb1132ebef158db1c3b5acb57570443be415b6fb48f2fc7aeb5",
+    "src/lvba_system.cpp": "47a37844358fa17c309cb0bf79ced712b5ebd932cd9cfa6c831beab570543d2c",
+    "src/dataset_io.cpp": "fc274477ffbf4cbab8d3406088afbd619dd9b01081eade19c229c2a087d58757",
+    "src/main.cpp": "2b248dc8207332e1c898892f89c5e810e0dc22feb86f7d2800a66455c53404b3",
+    "include/BALM/bavoxel.hpp": "de687bbf11be12dcc1b5fecd091711ef74c3ac52f15bf0e80c9ea1e5273f295c",
+    "include/BALM/tools.hpp": "eb40b5133533ba968da820d67a214feebd442c90c2c5362156fd61bfdeb49564"
+  },
+  "packaging_changes": [
+    "Configurable Sophus include and optional libgcc path",
+    "Shared production/test residual definitions",
+    "Absolute or project-relative dataset paths",
+    "Standalone build/test/run documentation"
+  ]
+}

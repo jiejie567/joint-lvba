@@ -1,0 +1,15 @@
+{
+  "initialization": "Corrected SDK camera poses; no SDK residual/prior",
+  "trajectory": "One camera knot per image; LiDAR scan residual interpolates adjacent knots, linear center + normalized quaternion interpolation",
+  "lidar": "Existing per-point SDK-odometry deskew; up to~300 sampled points/scan, range.3..12m, initial plane gate5cm, plane support>=3scans, sigma3cm; plane n/d jointly optimized",
+  "visual": "Existing COLMAP matches; SDK-depth/triangulation tracks with1deg seed selection, recover all observations within4px, >=4 distinct views, no plane requirement, Huber2px",
+  "plane_link": "Optional visual landmark-plane sigma4cm Huber2normalized",
+  "refine": "Fixed structure; >=4views with <=3px residual, median<=1.5px, parallax>=1deg if LiDAR-supported else2deg; per-camera >=12obs in>=6cells of8x6; Huber1.5px",
+  "gauge": "First pose fixed; LiDAR measurements determine metric scale",
+  "camera": "Original FishPoly rectified K406.8 with+0.5 COLMAP center conversion; output later used with common K550 training images",
+  "iteration_limits": [
+    35,
+    20
+  ],
+  "modified_source": "Isolated clone; original Global-LVBA untouched"
+}
