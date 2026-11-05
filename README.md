@@ -1,6 +1,6 @@
 # Joint LVBA
 
-在 Global-LVBA 基础上的实验性改进：**先联合优化雷达平面、视觉三维点与相机轨迹，再固定可靠结构精修视觉位姿**。用于离线改善已完成里程计的轨迹与地图一致性。
+在 Global-LVBA 基础上的实验性改进：**联合优化雷达平面、视觉三维点与相机轨迹**，可选固定可靠结构精修视觉位姿。用于离线改善已完成里程计的轨迹与地图一致性。
 
 初始位姿可来自 Odin SDK；优化目标中没有 SDK 绝对位姿或相对运动先验。首帧位姿固定以确定坐标基准，雷达约束提供米制尺度。
 
@@ -25,8 +25,10 @@
 1. **雷达视觉联合 BA。** 视觉重投影、雷达测量点到平面、具有可靠关联的视觉点到平面残差进入同一个问题。
    扫描时刻的位姿由邻近相机轨迹节点插值得到，雷达与视觉共同约束这些轨迹变量。
    这使雷达几何与视觉观测可以共同修正轨迹和结构。
-2. **固定可靠结构的视觉位姿精修。** 按观测数量、重投影误差和视差筛选可靠三维点，固定这些点后只优化相机位姿。
+2. **固定可靠结构的视觉位姿精修（默认关闭）。** 按观测数量、重投影误差和视差筛选可靠三维点，固定这些点后只优化相机位姿。
    观测数量或图像覆盖不足的相机保留第一阶段结果，降低弱约束区域被错误更新的风险。
+
+默认输出第一阶段位姿；如需开启第二阶段，在配置文件设置 `data_config/enable_visual_refinement: true`。此开关与 BALM 内部的 `BALM_stage2` 配置无关。
 
 第二阶段只有视觉重投影残差，**最终位姿没有继续受到雷达残差的共同约束**，可能偏离第一阶段的雷达几何最优解。
 因此准确描述是“联合 BA 后进行固定结构视觉精修”，并不表示最终阶段仍是雷达视觉联合优化，也不保证最终地图的雷达几何一致性自动提高。
@@ -118,9 +120,9 @@ OMP_NUM_THREADS=8 OPENBLAS_NUM_THREADS=1 \
 
 主要输出位于数据目录：
 
-- `joint_initial_camera_poses.txt`、`joint_camera_poses.txt`、`optimized_camera_poses.txt`：初始、联合优化及精修后的 world-to-camera 位姿。
-- `joint_solver.txt`、`refine_solver.txt`：Ceres 完整求解报告。
-- `reliable_structure.txt`、`refine_counts.txt`：可靠结构与每相机的观测覆盖统计。
+- `joint_initial_camera_poses.txt`、`joint_camera_poses.txt`、`optimized_camera_poses.txt`：初始、联合优化及最终 world-to-camera 位姿；关闭精修时最终位姿与联合优化位姿相同。
+- `joint_solver.txt`、`refine_solver.txt`：Ceres 求解报告，后者仅在启用精修时生成。
+- `reliable_structure.txt`、`refine_counts.txt`：精修启用时生成的可靠结构与每相机观测覆盖统计。复用输出目录时应注意旧精修文件可能仍然存在。
 
 ## 实验记录与限制
 

@@ -36,6 +36,7 @@ data_config:
   data_path: dataset/your_sequence/
   enable_lidar_ba: false
   enable_visual_ba: true
+  enable_visual_refinement: false  # Set true to enable the optional visual-only refinement.
   image_sample_step: 1
 extrin_calib:
   Pcl:

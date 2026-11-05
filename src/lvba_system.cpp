@@ -1336,6 +1336,9 @@ void LvbaSystem::optimizeCameraPoses() {
  ceres::Solve(opt,&joint,&summary);std::ofstream(dataset_path_+"joint_solver.txt")<<summary.FullReport();if(!summary.IsSolutionUsable())throw std::runtime_error("Joint solve failed");save("joint_camera_poses.txt");
  std::cout<<"JOINT_SOLVED planes="<<plane_count<<" laser_residuals="<<laser_count<<std::endl;
 
+ bool enable_visual_refinement = false;
+ nh_.param<bool>("data_config/enable_visual_refinement", enable_visual_refinement, false);
+ if (enable_visual_refinement) {
  // Select stable structure by multiple views, reprojection distribution and
  // translation parallax. No point coordinates are variables in stage two.
  std::vector<std::vector<int>> bypoint(points.size());for(int i=0;i<int(observations.size());++i)bypoint[observations[i].point].push_back(i);
@@ -1352,6 +1355,10 @@ void LvbaSystem::optimizeCameraPoses() {
  std::ofstream counts(dataset_path_+"refine_counts.txt");for(int k=0;k<M;++k)counts<<k<<' '<<obs_count[k]<<' '<<coverage[k].size()<<'\n';
  std::ofstream pts(dataset_path_+"reliable_structure.txt");pts<<std::setprecision(12);for(int j=0;j<int(points.size());++j)if(reliable[j]){pts<<j;for(auto x:points[j])pts<<' '<<x;pts<<'\n';}
  std::cout<<"REFINE_SOLVED reliable_points="<<reliable_count<<" fixed_cameras="<<fixed<<std::endl;
+ } else {
+  save("optimized_camera_poses.txt");
+  std::cout<<"REFINE_SKIPPED: optimized poses are the joint-stage poses"<<std::endl;
+ }
  for(int k=0;k<M;++k){Rcw_all_optimized_[k]=rotation(k).transpose();tcw_all_optimized_[k]=-Rcw_all_optimized_[k]*center(k);}
 }
 
